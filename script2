@@ -1,0 +1,23 @@
+Script started on Fri 10 Feb 2017 03:08:43 AM EST
+jpirone@linus:~/cs366/asn2$ gcc -Wall wash.o-c wash.c
+jpirone@linus:~/cs366/asn2$ gcc -Wall -c wash.c[3Pwash.o-c wash.c[3Pwash.o
+jpirone@linus:~/cs366/asn2$ gcc -Wall wash.o-c wash.c[3Pwash.o-c wash.c[3P./a.out foo.txt 
+Enter in one of the following commands: ’c’ list the current file to /dev/tty
+ ’d’ copy the current file (duplicate)
+ ’r’ rename the current file
+ ’u’ delete (unlink) the current file
+ ’t’ zero (length) the current file
+ ’a’ append the current file to another file
+ ’l’ display the last 100 bytes of the current file
+ ’m’ change the current file’s access permissions
+ ’x’ change the current file’s access time to the current time 
+ ’n’ goto the next name (i.e., the next file)
+ ’q’ quit
+open: Success
+File: foo.txt Command: l
+ Evidence suggests that egg laying and nest building are additional traits shared by all dinosaurs.
+close: Bad file descriptor
+File: foo.txt Command: q
+jpirone@linus:~/cs366/asn2$ exit
+
+Script done on Fri 10 Feb 2017 03:08:59 AM EST

@@ -1,0 +1,137 @@
+Test Plan:
+
+Test 1:
+	Input: 
+	./a.out foo.txt 
+
+	Output: 
+	Enter in one of the following commands: ’c’ list the current file to /dev/tty
+ 	’d’ copy the current file (duplicate)
+ 	’r’ rename the current file
+ 	’u’ delete (unlink) the current file
+ 	’t’ zero (length) the current file
+ 	’a’ append the current file to another file
+ 	’l’ display the last 100 bytes of the current file
+ 	’m’ change the current file’s access permissions
+ 	’x’ change the current file’s access time to the current time 
+ 	’n’ goto the next name (i.e., the next file)
+ 	’q’ quit
+	open: Success
+	File: foo.txt Command: q
+
+	Explanation:
+	In this script, I tested to see if the q command would successfully quit. It did.
+
+Test 2:
+	Input:
+	./a.out foo.txt
+
+	Output:
+	Enter in one of the following commands: ’c’ list the current file to /dev/tty
+	 ’d’ copy the current file (duplicate)
+ 	’r’ rename the current file
+ 	’u’ delete (unlink) the current file
+ 	’t’ zero (length) the current file
+ 	’a’ append the current file to another file
+	’l’ display the last 100 bytes of the current file
+ 	’m’ change the current file’s access permissions
+ 	’x’ change the current file’s access time to the current time 
+ 	’n’ goto the next name (i.e., the next file)
+ 	’q’ quit
+	open: Success
+	File: foo.txt Command: l
+ 	Evidence suggests that egg laying and nest building are additional traits shared by all dinosaurs.
+	close: Bad file descriptor
+	File: foo.txt Command: q
+
+	Explanation:
+	In this script, I tested to see if the l command would properly displace the last 100 bytes.
+
+Test 3:
+	Input:
+	./a.out foo.txt
+
+	Output:
+ 	-rw------- 1 jpirone jpirone  2312 Feb 10  1969 foo.txt 
+
+	Enter in one of the following commands: ’c’ list the current file to /dev/tty
+ 	’d’ copy the current file (duplicate)
+ 	’r’ rename the current file
+ 	’u’ delete (unlink) the current file
+ 	’t’ zero (length) the current file
+ 	’a’ append the current file to another file
+ 	’l’ display the last 100 bytes of the current file
+ 	’m’ change the current file’s access permissions
+ 	’x’ change the current file’s access time to the current time 
+ 	’n’ goto the next name (i.e., the next file)
+ 	’q’ quit
+	open: Success
+	File: foo.txt Command: m
+	Type what permission to change: 
+	700
+	Changed mode.
+	File: foo.txt Command: q
+    
+        -rwx------ 1 jpirone jpirone  2312 Feb 10  1969 foo.txt     
+  
+	Explanation:
+	In this script, I tested to see if the chmod command would work to change the file's permission.
+
+Test 4: 
+	Input:
+	./a.out foo.txt 
+
+	Output:
+	Enter in one of the following commands: ’c’ list the current file to /dev/tty
+ 	’d’ copy the current file (duplicate)
+ 	’r’ rename the current file
+ 	’u’ delete (unlink) the current file
+ 	’t’ zero (length) the current file
+ 	’a’ append the current file to another file
+ 	’l’ display the last 100 bytes of the current file
+ 	’m’ change the current file’s access permissions
+ 	’x’ change the current file’s access time to the current time 
+	’n’ goto the next name (i.e., the next file)
+        ’q’ quit
+	open: Success
+	File: foo.txt Command: x
+	Here is the time: Fri Feb 10 03:10:19 2017
+	File: foo.txt Command: q
+
+	Explanation:
+	This script tested to see if the x command would change the access time to the current time.
+
+Test 5: 
+	Input:
+	./a.out foo.txt
+
+	Output:
+	Enter in one of the following commands: ’c’ list the current file to /dev/tty
+ 	’d’ copy the current file (duplicate)
+	 ’r’ rename the current file
+	 ’u’ delete (unlink) the current file
+ 	’t’ zero (length) the current file
+ 	’a’ append the current file to another file
+ 	’l’ display the last 100 bytes of the current file
+ 	’m’ change the current file’s access permissions
+ 	’x’ change the current file’s access time to the current time 
+ 	’n’ goto the next name (i.e., the next file)
+ 	’q’ quit
+	File: foo.txt Command: l
+ 	Evidence suggests that egg laying and nest building are additional traits shared by all dinosaurs.
+	File: foo.txt Command: a
+	Enter in file destination: dino.txt
+	File appended to: dino.txt
+	File: foo.txt Command: r
+	Enter in new name: 
+	foo1.txt
+	File successfully renamed
+	File: foo1.txt Command: q
+
+	Explanation: 
+	This script tested to see if the l, a, and r commands would all work properly. All successes!
+
+
+
+
+

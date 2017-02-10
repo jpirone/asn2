@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-//#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <utime.h>
@@ -10,6 +9,14 @@
 
 int main(int argc, char *argv[])
 {
+ 
+ 
+  if(argc <= 1)
+  {
+    printf("No files input \n");
+    exit(-1);
+  }
+  
   char command = 'j';
 
   printf("Enter in one of the following commands:");
@@ -26,16 +33,16 @@ int main(int argc, char *argv[])
   printf(" ’q’ quit\n");
          
   
-  for (int i = 2; i < argc; i++)
+  for (int i = 1; i < argc; i++)
   {
-    printf("This is file number %d\n", i-1);
+    //printf("This is file number %d\n", i);
     FILE *fp;
-    printf("File: %s\n", argv[i]);
+    printf("File: %s", argv[i]);
     if(fp == NULL)
     {
       perror("open");
     }
-    printf("Enter in a command: \n");
+    printf(" Command: ");
     scanf(" %c", &command);
     while(command != 'n')
     {
@@ -54,8 +61,11 @@ int main(int argc, char *argv[])
       if (command == 'd')
       {
         fp = fopen(argv[i], "r");
+        if(fp == NULL)
+        {
+          perror("open");
+        }
         char ch;
-        //char buff[1000];
         char filename[101];
         FILE *newfile;  
  
@@ -69,11 +79,16 @@ int main(int argc, char *argv[])
         }
         fclose(newfile); 
         fclose(fp);
+        printf("File has been duplicated.\n");
       }
 
       if (command == 'r')
       { 
         fp = fopen(argv[i], "r");
+        if(fp == NULL)
+        {
+          perror("open");
+        }
         char newname[101];
         printf("Enter in new name: \n");
         scanf("%s", newname);
@@ -92,32 +107,44 @@ int main(int argc, char *argv[])
       if (command == 'u')
       {
         fp = fopen(argv[i], "r");
+        if(fp == NULL)
+        {
+          perror("open");
+        }
         int ret;
         ret = remove(argv[i]);
         if(ret == 0)
         {
-          printf("File deleted\n");
+          printf("File deleted.\n");
           break;
         }
         else
         {
-          printf("File not deleted\n");
+          printf("File not deleted.\n");
 	}
         fclose(fp);
       }
 
       if (command == 't')
       {
-         int fd = open(argv[i], O_WRONLY|O_TRUNC);
-         if (close(fd) < 0)
-    	   perror("close");
+        int fd = open(argv[i], O_WRONLY|O_TRUNC);
+        if(fd < 0)
+        {
+          perror("open");
+        }
+        if (close(fd) < 0)
+    	  perror("close");
+        printf("File has been truncated.\n");
       }
 
       if (command == 'a')
       {
         fp = fopen(argv[i], "r");
+        if(fp == NULL)
+        {
+          perror("open");
+        }
         char ch;
-        //char buff[1000];
         char filename[101];
         FILE *newfile;  
  
@@ -129,20 +156,28 @@ int main(int argc, char *argv[])
         {
 	  fputc(ch, newfile);
         }
+        printf("File appended to: %s\n", filename); 
         fclose(newfile); 
         fclose(fp);
+        
       }
+
       if (command == 'l')
       {
         char c[101];
         int fp = open(argv[i], O_RDONLY);
+        if(fp < 0)
+        {
+          perror("open");
+        }
         lseek(fp, -100L, SEEK_END);
         int filebytes = read(fp, c, 100);
         c[filebytes] = '\0';
 
         printf("%s", c);
 
-        close(fp);
+        if (close(fp) < 0)
+    	  perror("close");
       }
 
       if (command == 'm')
@@ -189,15 +224,15 @@ int main(int argc, char *argv[])
 
       if (command == 'x')
       {
-        struct stat statbuf;
-        struct utimbuf timebuf;
+        struct stat s;
+        struct utimbuf t;
 
         if((fp = fopen(argv[i], "r+b")) < 0)
         {
           printf("Error opening file\n");
           return -1;
         }
-        if(stat(argv[i], &statbuf) < 0)
+        if(stat(argv[i], &s) < 0)
         {
           printf("Error getting file file stats\n");
           return -1;
@@ -206,23 +241,24 @@ int main(int argc, char *argv[])
        
         fclose(fp);
 
-        if(utime(argv[i], &timebuf) < 0)
+        if(utime(argv[i], &t) < 0)
         {
           printf("unable to reset time\n");
           return -1;
         }
 
-        printf("time is %s", ctime(&statbuf.st_ctime));
+        printf("Here is the time: %s", ctime(&s.st_ctime));
 
       }
 
       if (command == 'q')
       {
-        exit(0);
+        exit(-1);
+
       }
-      printf("Enter another command: ");
+      printf("File: %s", argv[i]);
+      printf(" Command: ");
       scanf(" %c", &command);
-      //printf("Command: %c\n", command);
     }
   }
 

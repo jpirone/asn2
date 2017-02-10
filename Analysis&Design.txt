@@ -1,0 +1,31 @@
+Analysis:
+To do a proper anaylsis, I would like to go through each of the commands needed and explain
+how I approached them. First is the c command, this command prints the contents of the file
+to the terminal, similar to the cat command in linux. This was done using a simple while loop 
+to iterate throughout the entire file. Next is the d command that duplicates a file. This was 
+done by openning the original file to read, and another (given by the user) file to write to.
+Then we have the r command which renames the file which is done by asking for user input, then
+utilizes the rename function for a file. After this we have the u command which deletes a file 
+which can be done in a similar fashion as the rename command. By using the remove function, a
+file can be removed. Then we have the t command which truncates a file which is done by opening
+the file and truncating using file IO commands. The a command appends the file to another file
+which is given by the user. Essentially, this code is very similar to the duplication but instead
+of opening the file to write to, its openned to append to. The l command displays the last 100 bytes
+using lseek to locate where the last 100 bytes of the file are. Also, the m command changes the
+access permissions by utilizing the chmod function. This was done by asking for user input to find
+out how they want to change their file and then completing the chmod based on their request. Next is
+the x command which has the purpose of changing the current file's access time to the current time
+which uses the utime command and needs structures. The last two commands are similar in nature. The
+n command goes to the next file in the argument using a break and q quits the program using an exit.
+
+Design:
+The overall design will be a for loop to iterate through the files given. Before this, there will be
+an if statement checking if files were put in the argument or not. Nested in the for loop is a while
+loop that will continue to iterate until the user wants the next file by typing the command n. This
+means while the command is not n, the while loop will keep iterating. An important design choice is 
+to not use methods for each command, rather stick the body of each method in the if statement. I made
+this decision because of fast readability. Each command's body is more accessible when it is right 
+under its condition. There is just a personal preference as I would rather see the condition and its 
+body rather than the condition, a method call, and having to scroll and find the method. Finally, the 
+print statements that were extra to the example run I felt were nessecary to make the program more
+understanding for the user when running the program. 
