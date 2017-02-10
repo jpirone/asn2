@@ -1,3 +1,7 @@
+//Joe Pirone
+//CS366
+//This is my code
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
